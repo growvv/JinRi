@@ -77,7 +77,7 @@ class ViewController: UIViewController {
     func initList() {
         
         let safeheight = self.view.safeAreaLayoutGuide.layoutFrame.size.height
-        var alignTop = scrollView!.snp.top
+        var alignTop = scrollView!.snp.bottom
         
         for index in 0..<self.sections{
             // type 0
