@@ -23,6 +23,8 @@
 		848C8F4025764CBA002D275F /* ShowView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 848C8F3F25764CBA002D275F /* ShowView.swift */; };
 		84F2F5D6257780E3002854D9 /* GetData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84F2F5D5257780E3002854D9 /* GetData.swift */; };
 		84F2F5DB257782B8002854D9 /* metadata.json in Resources */ = {isa = PBXBuildFile; fileRef = 84F2F5DA257782B8002854D9 /* metadata.json */; };
+		84F2F5E32577A663002854D9 /* LoginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84F2F5E22577A663002854D9 /* LoginViewController.swift */; };
+		84F2F5F02577F1DB002854D9 /* ArticleDetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84F2F5EF2577F1DB002854D9 /* ArticleDetailViewController.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -64,6 +66,8 @@
 		848C8F3F25764CBA002D275F /* ShowView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ShowView.swift; sourceTree = "<group>"; };
 		84F2F5D5257780E3002854D9 /* GetData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GetData.swift; sourceTree = "<group>"; };
 		84F2F5DA257782B8002854D9 /* metadata.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; name = metadata.json; path = "../../../Downloads/资源包/metadata.json"; sourceTree = "<group>"; };
+		84F2F5E22577A663002854D9 /* LoginViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginViewController.swift; sourceTree = "<group>"; };
+		84F2F5EF2577F1DB002854D9 /* ArticleDetailViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ArticleDetailViewController.swift; sourceTree = "<group>"; };
 		AF50CABA4B57BB02B5C09BA3 /* Pods-MyAlamofire-MyAlamofireUITests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-MyAlamofire-MyAlamofireUITests.release.xcconfig"; path = "Target Support Files/Pods-MyAlamofire-MyAlamofireUITests/Pods-MyAlamofire-MyAlamofireUITests.release.xcconfig"; sourceTree = "<group>"; };
 		CF6852014AF1891843E42426 /* Pods-MyAlamofire.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-MyAlamofire.release.xcconfig"; path = "Target Support Files/Pods-MyAlamofire/Pods-MyAlamofire.release.xcconfig"; sourceTree = "<group>"; };
 		D1879E429144B4C58AF480A2 /* Pods_MyAlamofire.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_MyAlamofire.framework; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -153,9 +157,11 @@
 				848C8ED525751E6D002D275F /* AppDelegate.swift */,
 				848C8ED725751E6D002D275F /* SceneDelegate.swift */,
 				848C8ED925751E6D002D275F /* ViewController.swift */,
+				84F2F5E22577A663002854D9 /* LoginViewController.swift */,
 				848C8F3F25764CBA002D275F /* ShowView.swift */,
 				84F2F5D5257780E3002854D9 /* GetData.swift */,
 				848C8F22257623DA002D275F /* FirstViewController.swift */,
+				84F2F5EF2577F1DB002854D9 /* ArticleDetailViewController.swift */,
 				848C8F172575F511002D275F /* DestinationViewController.swift */,
 				848C8EDB25751E6D002D275F /* Main.storyboard */,
 				848C8EDE25751E6F002D275F /* Assets.xcassets */,
@@ -426,9 +432,11 @@
 				84F2F5D6257780E3002854D9 /* GetData.swift in Sources */,
 				848C8EDA25751E6D002D275F /* ViewController.swift in Sources */,
 				848C8ED625751E6D002D275F /* AppDelegate.swift in Sources */,
+				84F2F5E32577A663002854D9 /* LoginViewController.swift in Sources */,
 				848C8ED825751E6D002D275F /* SceneDelegate.swift in Sources */,
 				848C8F182575F511002D275F /* DestinationViewController.swift in Sources */,
 				848C8F4025764CBA002D275F /* ShowView.swift in Sources */,
+				84F2F5F02577F1DB002854D9 /* ArticleDetailViewController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

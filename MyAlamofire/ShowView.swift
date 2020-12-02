@@ -98,6 +98,7 @@ class ShowView: UIView {
             textview.text = text
             textview.font = textview.font?.withSize(20)
             textview.isEditable = false
+//            textview.isUserInteractionEnabled = false
             
             textview.snp.makeConstraints { (make) in
                 make.width.equalToSuperview()

@@ -15,10 +15,10 @@ class ViewController: UIViewController {
     var scrollViewBody: UIScrollView?
     
     let numberOfButtons = 5
-    let namesOfButton = ["关注", "推荐", "热榜", "上海", "小说"]
+    let namesOfButton = ["关注", "推荐", "热榜", "上海", "科技"]
     
     let sectionsNumber = 5    // 区块的数目
-    let sectionHeight = 150   // 区块的高度
+    let sectionHeight = 180   // 区块的高度
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -27,6 +27,7 @@ class ViewController: UIViewController {
         
         initScrollView()
         initList()
+//        initEdit()
     }
 
     // 初始化导航栏
@@ -57,8 +58,8 @@ class ViewController: UIViewController {
             button.setTitle(namesOfButton[index], for: .normal)
             button.setTitleColor(UIColor.black, for: .normal)
             button.setTitleColor(UIColor.blue, for: .selected)
-            button.addTarget(self, action: #selector(pageJump), for: .touchDown)
             
+            button.addTarget(self, action: #selector(pageJump), for: .touchDown)
         }
     }
     
@@ -68,7 +69,7 @@ class ViewController: UIViewController {
 
         scrollViewBody = UIScrollView(frame: CGRect(x: 100, y: 200, width: 100, height: 1000))
 //        scrollViewBody?.contentSize = CGSize(width: 400, height: 1000)
-        scrollViewBody?.backgroundColor = .gray
+//        scrollViewBody?.backgroundColor = .gray
 //        scrollViewBody?.contentInset = UIEdgeInsets(top: 10, left: 10, bottom: 10, right: 10)
         self.view.addSubview(scrollViewBody!)
 
@@ -114,16 +115,29 @@ class ViewController: UIViewController {
                 make.left.equalToSuperview()
             }
             alignTop = typeView.snp.bottom
-        }
 
+            /* UIView继承于UIResponder是没有addTarget 方法的，所有只能在UIView上添加手势UITapGestureRecognizer来实现点击事件。
+            */
+            typeView.isUserInteractionEnabled = true
+            let tapGesture = UITapGestureRecognizer(target: self, action: #selector(tapGestureAction))
+            tapGesture.numberOfTapsRequired = 1
+            tapGesture.delegate = self
+            typeView.addGestureRecognizer(tapGesture)
+
+        }
     }
-    
+
+}
+
+
+extension ViewController{
+
     @objc func pageJump() {
         print("main to dest")
-        //创建一个页面
-        let destination = DestinationViewController()
-        //取目标页面的一个变量进行赋值，以属性的方式进行传值。
-        destination.message = "传递的信息"
+//        //创建一个页面
+//        let destination = DestinationViewController()
+//        //取目标页面的一个变量进行赋值，以属性的方式进行传值。
+//        destination.message = "传递的信息"
         
         let first = FirstViewController()
         
@@ -132,3 +146,31 @@ class ViewController: UIViewController {
     }
 }
 
+
+
+extension ViewController{
+
+    @objc  func tapGestureAction(){
+        print("跳转到文章详情页")
+        let user: UserDefaults = UserDefaults.standard
+        if let token = user.string(forKey: "token"){  // 有的话直接跳到公告页
+            print(token)
+            let articleView = ArticleDetailViewController()
+            articleView.id = "event_01"
+            self.navigationController?.pushViewController(articleView, animated: true)
+        }
+        else{  // 没有token的话跳到登录页面
+            let loginView = LoginViewController()
+            self.navigationController?.pushViewController(loginView, animated: true)
+        }
+    }
+}
+
+// 手势冲突：允许两个手势识别器同时生效
+// 解决的textview不响应的问题
+extension ViewController: UIGestureRecognizerDelegate {
+    func gestureRecognizer(_ gestureRecognizer: UIGestureRecognizer, shouldRecognizeSimultaneouslyWith otherGestureRecognizer: UIGestureRecognizer) -> Bool {
+        
+        return true
+    }
+}
