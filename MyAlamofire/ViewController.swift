@@ -11,12 +11,14 @@ import SnapKit
 
 class ViewController: UIViewController {
 
-    var scrollView: UIScrollView?
+    var scrollViewHeader: UIScrollView?
+    var scrollViewBody: UIScrollView?
     
     let numberOfButtons = 5
     let namesOfButton = ["关注", "推荐", "热榜", "上海", "小说"]
     
-    let sections = 4    // 区块数目
+    let sectionsNumber = 10    // 区块的数目
+    let sectionHeight = 150   // 区块的高度
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -28,21 +30,21 @@ class ViewController: UIViewController {
 
     // 初始化导航栏
     func initScrollView(){
-        scrollView = UIScrollView()
-        scrollView?.layer.borderWidth = 1
-        scrollView?.layer.borderColor = UIColor.gray.cgColor
-        self.view.addSubview(scrollView!)
+        scrollViewHeader = UIScrollView()
+        scrollViewHeader?.layer.borderWidth = 1
+        scrollViewHeader?.layer.borderColor = UIColor.gray.cgColor
+        self.view.addSubview(scrollViewHeader!)
 
-        scrollView!.snp.makeConstraints { (make) in
+        scrollViewHeader!.snp.makeConstraints { (make) in
             make.width.equalToSuperview()
             make.height.equalToSuperview().dividedBy(18)
             make.top.equalTo(self.view.safeAreaLayoutGuide.snp.top)
         }
                 
-        var alignLeft = scrollView!.snp.left   // 上一个Button的左边, ConstraintItem类型
+        var alignLeft = scrollViewHeader!.snp.left   // 上一个Button的左边, ConstraintItem类型
         for index in 0..<self.numberOfButtons {
             let button = UIButton()
-            scrollView!.addSubview(button)
+            scrollViewHeader!.addSubview(button)
                 
             button.snp.makeConstraints { (make) in
                 make.height.equalToSuperview()
@@ -60,6 +62,61 @@ class ViewController: UIViewController {
     }
     
     
+    // 展示5种View
+    func initList() {
+
+        scrollViewBody = UIScrollView(frame: CGRect(x: 100, y: 200, width: 100, height: 1000))
+//        scrollViewBody?.contentSize = CGSize(width: 400, height: 1000)
+        scrollViewBody?.backgroundColor = .gray
+//        scrollViewBody?.contentInset = UIEdgeInsets(top: 10, left: 10, bottom: 10, right: 10)
+        self.view.addSubview(scrollViewBody!)
+
+        scrollViewBody!.snp.makeConstraints { (make) in
+            make.width.equalToSuperview()
+//            make.height.equalTo(self.sectionsNumber * self.sectionHeight)
+            make.size.equalTo(self.view.safeAreaLayoutGuide)
+            make.top.equalTo(scrollViewHeader!.snp.bottom)
+            make.left.equalToSuperview()
+//            make.bottom.trailing.equalToSuperview()
+        }
+        
+        let contentView = UIView()
+        scrollViewBody?.addSubview(contentView)
+        contentView.snp.makeConstraints { (make) in
+//            make.top.leading.bottom.trailing.equalToSuperview().inset(0)
+            make.top.equalTo(0)
+            make.bottom.equalTo(0)
+            make.left.equalTo(0)
+            make.right.equalTo(0)
+            make.width.equalToSuperview()
+            make.height.equalTo(self.sectionHeight * (self.sectionsNumber+0.5))
+        }
+        
+        
+//        let safeheight = self.view.safeAreaLayoutGuide.layoutFrame.size.height
+//        var alignTop = scrollView!.snp.bottom
+        var alignTop = contentView.snp.top
+        
+        for index in 0..<self.sectionsNumber{
+            let typeView = ShowView(frame: CGRect(x: 0, y: 0, width: 0, height: 0), section: sectionsData[index])
+//            self.view.addSubview(typeView)
+            contentView.addSubview(typeView)
+            typeView.layer.borderWidth = 1
+            typeView.layer.borderColor = UIColor.gray.cgColor
+            
+            
+            typeView.snp.makeConstraints { (make) in
+                make.width.equalToSuperview()
+    //            make.height.equalTo(150)
+                make.height.equalTo(self.sectionHeight)
+                make.top.equalTo(alignTop)
+                make.left.equalToSuperview()
+            }
+            alignTop = typeView.snp.bottom
+        }
+
+    }
+    
     @objc func pageJump() {
         print("main to dest")
         //创建一个页面
@@ -71,82 +128,6 @@ class ViewController: UIViewController {
         
         //跳转
         self.navigationController?.pushViewController(first, animated: true)
-    }
-    
-    // 展示5种View
-    func initList() {
-        
-        let safeheight = self.view.safeAreaLayoutGuide.layoutFrame.size.height
-        var alignTop = scrollView!.snp.bottom
-        
-        for index in 0..<self.sections{
-            // type 0
-            let typeView = ShowView(frame: CGRect(x: 0, y: 0, width: 0, height: 0), section: sectionsData[index])
-            self.view.addSubview(typeView)
-            typeView.layer.borderWidth = 1
-            typeView.layer.borderColor = UIColor.gray.cgColor
-            
-            
-            typeView.snp.makeConstraints { (make) in
-                make.width.equalToSuperview()
-    //            make.height.equalTo(150)
-                make.height.equalTo(safeheight/5)
-                make.top.equalTo(alignTop)
-            }
-            alignTop = typeView.snp.bottom
-        }
-        
-//        // type 0
-//        let typeView0 = ShowView(frame: CGRect(x: 0, y: 0, width: 0, height: 0), type: 0, title: "标题", text: "使用background属性可以设置输入框的", images: nil)
-//        self.view.addSubview(typeView0)
-//        typeView0.layer.borderWidth = 1
-//        typeView0.layer.borderColor = UIColor.gray.cgColor
-//
-//
-//        typeView0.snp.makeConstraints { (make) in
-//            make.width.equalToSuperview()
-////            make.height.equalTo(150)
-//            make.height.equalTo(safeheight/5)
-//            make.top.equalTo(scrollView!.snp.bottom)
-//        }
-//
-//
-//
-//        // type 1
-//        let typeView1 = ShowView(frame: CGRect(x: 0, y: 0, width: 0, height: 0), type: 1, title: "标题", text: "巡洋计划", images: ["event_02"])
-//        self.view.addSubview(typeView1)
-//        typeView1.layer.borderWidth = 1
-//        typeView1.layer.borderColor = UIColor.gray.cgColor
-//
-//        typeView1.snp.makeConstraints { (make) in
-//            make.width.equalToSuperview()
-//            make.height.equalTo(safeheight/5)
-//            make.top.equalTo(typeView0.snp.bottom)
-//        }
-//
-//        // type 2
-//        let typeView2 = ShowView(frame: CGRect(x: 0, y: 0, width: 0, height: 0), type: 2, title: "标题", text: "合照", images: ["tb09_1"])
-//        self.view.addSubview(typeView2)
-//        typeView2.layer.borderWidth = 1
-//        typeView2.layer.borderColor = UIColor.gray.cgColor
-//
-//        typeView2.snp.makeConstraints { (make) in
-//            make.width.equalToSuperview()
-//            make.height.equalTo(safeheight/5)
-//            make.top.equalTo(typeView1.snp.bottom)
-//        }
-//
-//        // type 3
-//        let typeView3 = ShowView(frame: CGRect(x: 0, y: 0, width: 0, height: 0), type: 4, title: "标题", text: "划船", images: ["tb09_1", "tb09_2", "tb09_3", "tb09_4"])
-//        self.view.addSubview(typeView3)
-//        typeView3.layer.borderWidth = 1
-//        typeView3.layer.borderColor = UIColor.gray.cgColor
-//
-//        typeView3.snp.makeConstraints { (make) in
-//            make.width.equalToSuperview()
-//            make.height.equalTo(safeheight/5)
-//            make.top.equalTo(typeView2.snp.bottom)
-//        }
     }
 }
 

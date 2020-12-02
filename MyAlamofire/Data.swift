@@ -30,5 +30,10 @@ public var sectionsData: [Section] = [
     Section(type: 1, title: "标题", text: "巡洋计划", images: ["event_02"]),
     Section(type: 2, title: "标题", text: "合照", images: ["tb09_1"]),
     Section(type: 3, title: "标题", text: "划船", images: ["tb09_2"]),
+    Section(type: 4, title: "标题", text: "划船", images: ["tb09_1", "tb09_2", "tb09_3", "tb09_4"]),
+    Section(type: 0, title: "标题", text: "使用background属性可以设置输入框的", images: nil),
+    Section(type: 1, title: "标题", text: "巡洋计划", images: ["event_02"]),
+    Section(type: 2, title: "标题", text: "合照", images: ["tb09_1"]),
+    Section(type: 3, title: "标题", text: "划船", images: ["tb09_2"]),
     Section(type: 4, title: "标题", text: "划船", images: ["tb09_1", "tb09_2", "tb09_3", "tb09_4"])
 ]
