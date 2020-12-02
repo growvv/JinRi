@@ -21,9 +21,7 @@ class ShowView: UIView {
         self.title = section.title
         self.text = section.title
         self.images = section.images
-        if let tmpimage = images?[0]{
-            self.singleImage = tmpimage
-        }
+        self.singleImage = section.singleImage
         
         super.init(frame: frame)
 
@@ -136,7 +134,6 @@ class ShowView: UIView {
             
             var alignLeft = self.snp.left
             for image in images!{
-//                var imageview: UIImageView?
                 let uiimage = UIImage(named: image)
                 let imageview = UIImageView(image: uiimage)
                 self.addSubview(imageview)

@@ -17,13 +17,14 @@ class ViewController: UIViewController {
     let numberOfButtons = 5
     let namesOfButton = ["关注", "推荐", "热榜", "上海", "小说"]
     
-    let sectionsNumber = 10    // 区块的数目
+    let sectionsNumber = 5    // 区块的数目
     let sectionHeight = 150   // 区块的高度
     
     override func viewDidLoad() {
         super.viewDidLoad()
         
         self.title = "今日头条"
+        
         initScrollView()
         initList()
     }
@@ -89,17 +90,17 @@ class ViewController: UIViewController {
             make.left.equalTo(0)
             make.right.equalTo(0)
             make.width.equalToSuperview()
-            make.height.equalTo(self.sectionHeight * (self.sectionsNumber+0.5))
+            make.height.equalTo(self.sectionHeight * (self.sectionsNumber+1))
         }
         
         
 //        let safeheight = self.view.safeAreaLayoutGuide.layoutFrame.size.height
-//        var alignTop = scrollView!.snp.bottom
         var alignTop = contentView.snp.top
+        let sectionsData = GetData().sections  // 获取数据
+//        print(sectionsData)
         
         for index in 0..<self.sectionsNumber{
             let typeView = ShowView(frame: CGRect(x: 0, y: 0, width: 0, height: 0), section: sectionsData[index])
-//            self.view.addSubview(typeView)
             contentView.addSubview(typeView)
             typeView.layer.borderWidth = 1
             typeView.layer.borderColor = UIColor.gray.cgColor
